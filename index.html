@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+ <html lang="it" dir="ltr">
+     <head>
+         <meta charset="utf-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap" rel="stylesheet">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+         <script src="main.js" charset="utf-8"></script>
+         <link rel="stylesheet" href="style.css">
+         <title></title>
+     </head>
+     <body>
+        <header>
+            <input type="text" name="" value="" placeholder="Titolo">
+            <button type="button" name="button">Search</button>
+        </header>
+        <main>
+            <div class="book-container"></div>
+        </main>
+        <script id="template" type="text/x-handlebars-template">
+            <div class="book-card">
+                <div class="cover-container">
+                    <img src="{{{ img }}}" alt="">
+                </div>
+                <div class="info-container">
+                    <h3>{{ title }}</h3>
+                    <ul>
+                        <li>{{ author }}</li>
+                        <li>{{ publishedDate }}</li>
+                        <li>{{ rating }}</li>
+                        <li>{{ description }}</li>
+                    </ul>
+                </div>
+            </div>
+        </script>
+     </body>
+ </html>
