@@ -28,7 +28,7 @@ $(document).ready(function() {
             'success': function(data) {
                 // cicliamo il data .items che ci restituisce un libro ad ogni ciclio
                 var books = data.items;
-                bookGenerator(books)
+                bookGenerator(books);
             },
             'error': function() {
             }
@@ -47,19 +47,26 @@ $(document).ready(function() {
                     'key':'AIzaSyAGHLZ08VPW8NW1rwJELaYO1vnBLThiyKE'
                 },
                 'success': function(data) {
-                    // siamo dentro i credits del singolo libro
                     var currentBook = data.volumeInfo;
                     if (currentBook.authors) {
                         var str =  currentBook.authors.join(' ');
                     } else {
                         var str = 'author not avaible';
                     }
+                    if (!currentBook.averageRating) {
+                        var vote = 0;
+                    } else {
+                        var vote = Math.floor(currentBook.averageRating);
+                    }
+                    var fullStar = '<i class="fas fa-star"></i>';
+                    var emptyStar = '<i class="far fa-star"></i>';
                     var properties = {
                         'img':  currentBook.imageLinks.thumbnail,
                         'title': currentBook.title,
                         'author': str,
-                        'publishedDate': currentBook.publishedDate,
-                        'rating': currentBook.averageRating,
+                        'publishedDate': currentBook.publishedDate.slice(0, 4),
+                        'rating': fullStar.repeat(vote),
+                        'noRating': emptyStar.repeat(5 - vote),
                         'description': currentBook.description,
                         'publisher': currentBook.publisher,
                         'pageCount':  currentBook.pageCount,
@@ -74,4 +81,10 @@ $(document).ready(function() {
         }
     };
 });
-//
+
+$(document).on('click', '.book-card', function() {
+    $('.info-container').removeClass('active');
+    $(this).next('.info-container').addClass('active');
+})
+
+// la prima carda che appare abbia la classe active

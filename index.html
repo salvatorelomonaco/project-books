@@ -17,23 +17,39 @@
             <button type="button" name="button">Search</button>
         </header>
         <main>
-            <div class="book-container"></div>
-        </main>
-        <script id="template" type="text/x-handlebars-template">
-            <div class="book-card">
-                <div class="cover-container">
-                    <img src="{{{ img }}}" alt="">
+            <div class="book-container">
+                <!-- <div class="book-card">
+                    <div class="cover-container">
+                        <img src="http://books.google.com/books/content?id=mptPJQAACAAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73HRSZim8TEw1aE0f4PWdCrhl96Ch1DXWDINahQh90pnCoGNQe5FqTgUIrmk1OOZVO2jtIz9c3KZnV_lFxxibx3Xf1ecQcW2wyYPQmzfZSHdmZLnDlab_pQ3ZeptJes8_2Nm5_J&source=gbs_api" alt="">
+                    </div>
                 </div>
-                <div class="info-container">
+                <div class="info-container active">
                     <h3>{{ title }}</h3>
                     <ul>
                         <li>{{ author }}</li>
                         <li>{{ publishedDate }}</li>
-                        <li>{{ rating }}</li>
-                        <li>{{ description }}</li>
+                        <li>{{{ rating }}}{{{ noRating }}}</li>
+                        <li>{{{ description }}}</li>
                     </ul>
                 </div>
+            </div> -->
+        </main>
+        <script id="template" type="text/x-handlebars-template">
+            <div class="book-card">
+                <div class="cover-container">
+                    <img src=" {{ img }}" alt="">
+                </div>
             </div>
+            <div class="info-container">
+                <h3>{{ title }}</h3>
+                <ul>
+                    <li>{{ author }}</li>
+                    <li>{{ publishedDate }}</li>
+                    <li>{{{ rating }}}{{{ noRating }}}</li>
+                    <li>{{{ description }}}</li>
+                </ul>
+            </div>
+        </div>
         </script>
      </body>
  </html>
