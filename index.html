@@ -13,26 +13,33 @@
      </head>
      <body>
         <header>
-            <input type="text" name="" value="" placeholder="Titolo">
-            <button type="button" name="button">Search</button>
+            <div class="container">
+                <div class="header left">
+                    <span id="logo">
+                        <span>P<span id="bar">/</span>S</span> Books
+                    </span>
+                </div>
+                <div class="header right">
+                    <input id="searchbar" type="text" name="" value="">
+                    <i id="search_icon" class="fas fa-search fa-md"></i>
+                </div>
+            </div>
         </header>
         <main>
+            <div class="intro">
+                <h1>Innamorati dei libri, ma prima cercali!</h1>
+                <img src="img/book_lover.svg" alt="">
+            </div>
+            <div class="arrow left">
+                <i class="fas fa-chevron-left"></i>
+            </div>
             <div class="book-container">
-                <!-- <div class="book-card">
-                    <div class="cover-container">
-                        <img src="http://books.google.com/books/content?id=mptPJQAACAAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73HRSZim8TEw1aE0f4PWdCrhl96Ch1DXWDINahQh90pnCoGNQe5FqTgUIrmk1OOZVO2jtIz9c3KZnV_lFxxibx3Xf1ecQcW2wyYPQmzfZSHdmZLnDlab_pQ3ZeptJes8_2Nm5_J&source=gbs_api" alt="">
-                    </div>
-                </div>
-                <div class="info-container active">
-                    <h3>{{ title }}</h3>
-                    <ul>
-                        <li>{{ author }}</li>
-                        <li>{{ publishedDate }}</li>
-                        <li>{{{ rating }}}{{{ noRating }}}</li>
-                        <li>{{{ description }}}</li>
-                    </ul>
-                </div>
-            </div> -->
+                <div class="top section"></div>
+                <div class="bottom section"></div>
+            </div>
+            <div class="arrow right">
+                <i class="fas fa-chevron-right"></i>
+            </div>
         </main>
         <script id="template" type="text/x-handlebars-template">
             <div class="book-card">
@@ -40,7 +47,9 @@
                     <img src=" {{ img }}" alt="">
                 </div>
             </div>
-            <div class="info-container">
+        </script>
+        <script id="templateBottom" type="text/x-handlebars-template">
+            <div class="info-container {{ class }}">
                 <h3>{{ title }}</h3>
                 <ul>
                     <li>{{ author }}</li>
@@ -49,7 +58,6 @@
                     <li>{{{ description }}}</li>
                 </ul>
             </div>
-        </div>
         </script>
-     </body>
+    </body>
  </html>
