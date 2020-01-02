@@ -7,7 +7,7 @@ header {
 }
 
 header .container {
-    width: 70%;
+    width: 80%;
     height: 100%;
     margin: 0 auto;
     display: flex;
@@ -18,11 +18,13 @@ header .container {
 .header.left {
     color: white;
     font-size: 25px;
+    cursor: default;
 }
 
 #logo span {
-    font-size: 30px;
+    font-size: 35px;
     font-weight: 800;
+    color: #34325e;
 }
 
 #logo span #bar {
@@ -43,10 +45,23 @@ header .container {
     color: white;
     padding-left: 10px;
     display: none;
-    background-color: #396e6d;
+    background-color: inherit;
     border-bottom: 3px solid white;
     margin-right: 15px;
+    /* animation-name: example;
+    animation-duration: 0.3s; */
 }
+
+#searchbar::placeholder {
+    opacity: 0.7;
+    font-size: 16px;
+    color: white;
+}
+
+/* @keyframes example {
+    0% {width: 0%;}
+    100% {width: 100%;}
+} */
 
 #search_icon {
     font-size: 30px;
@@ -56,10 +71,28 @@ header .container {
     cursor: pointer;
 }
 
+button {
+    border: 0;
+    background-color: white;
+    color:  #4b8e8d;
+    padding: 9px 24px;
+    margin-left: 45px;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
 main {
     margin-top: 30px;
     height: calc(100% - 80px);
     width: 100%;
+    position: relative;
 }
 
 .intro {
@@ -71,7 +104,9 @@ main {
 }
 
 .intro h1 {
-    padding: 20px 0 40px 0;
+    text-align: center;
+    padding: 10px 0 50px 0;
+    color: #34325e;
 }
 
 .intro img {
@@ -112,9 +147,15 @@ main {
 }
 
 .arrow i {
+    transition: 0.2s;
     display: none;
-    font-size: 30px;
+    font-size: 50px;
     color: #4b8e8d;
+    cursor: pointer;
+}
+
+.arrow i:hover {
+    transform: scale(1.2);
 }
 
 .book-card {
@@ -122,14 +163,17 @@ main {
     width: 128px;
     height: 191px;
     margin: 20px 15px;
-    -webkit-box-shadow: 5px 5px 18px 2px rgba(0,0,0,0.6);
-    -moz-box-shadow: 5px 5px 18px 2px rgba(0,0,0,0.6);
-    box-shadow: 5px 5px 18px 2px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
     opacity: 0.4;
 }
 
 .book-card.opacity {
     opacity: 1;
+    -webkit-box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.7);
+    -moz-box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.7);
+    box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.7);
 }
 
 .book-card.hide {
@@ -154,11 +198,25 @@ main {
 }
 
 .info-container.active {
-    padding-left: 20px;
+    padding: 15px;
     width: 100%;
-    overflow: auto;
-    border: 1px solid black;
+    border: 1px solid #4b8e8d;
     display: block;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.info-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.info-container::-webkit-scrollbar-track {
+    background: rgba(75, 142, 141, 0.3);
+}
+
+.info-container::-webkit-scrollbar-thumb {
+    background-color:  #4b8e8d;
+    outline: 0;
 }
 
 .info-container {
@@ -167,8 +225,51 @@ main {
 
 .info-container ul li {
     list-style: none;
+    margin: 10px 0;
+}
+
+.info-container ul li:last-child {
+    line-height: 25px;
 }
 
 .fa-star {
     color: gold;
+}
+
+@media screen and (max-width: 768px) {
+    #searchbar {
+        width: 250px;
+    }
+
+    button {
+        padding: 6px 12px;
+        margin-left: 25px;
+        border-radius: 3px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    #search_icon {
+        font-size: 28px;
+        margin-top: 5px;
+        font-weight: 900;
+    }
+}
+
+@media screen and (max-width: 510px) {
+    .intro img {
+        height: 300px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    button {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 378px) {
+    .intro img {
+        height: 250px;
+    }
 }

@@ -30,6 +30,10 @@ $(document).ready(function() {
     //aggiungiamo classe show all'u;ltimo libro
     //intercettiamo click su freccia
     $('.arrow.right i').click(function(){
+        var bookCorrente = $('.book-card.opacity');
+        var bookSucc = bookCorrente.next();
+        bookCorrente.removeClass('opacity');
+        bookSucc.addClass('opacity');
         $('.top.section').append($('.book-card').eq(0));
         var infoCorrente = $('.info-container.active');
         var infoSucc = infoCorrente.next();
@@ -40,8 +44,12 @@ $(document).ready(function() {
 
     $('.arrow.left i').click(function(){
         // BISOGNA USCIRE DAI 39 FISSI!!!!
-        $('.top.section').prepend($('.book-card').eq(39));
-        $('.bottom.section').prepend($('.info-container').eq(39));
+        $('.top.section').prepend($('.book-card').eq(9));
+        $('.bottom.section').prepend($('.info-container').eq(9));
+        var bookCorrente = $('.book-card.opacity');
+        var bookSucc = bookCorrente.prev();
+        bookCorrente.removeClass('opacity');
+        bookSucc.addClass('opacity');
         var infoCorrente = $('.info-container.active');
         var infoPrev = infoCorrente.prev();
         infoCorrente.removeClass('active');
@@ -54,7 +62,7 @@ $(document).ready(function() {
             'method': 'GET',
             'data':{
                 'key':'AIzaSyAGHLZ08VPW8NW1rwJELaYO1vnBLThiyKE',
-                'maxResults': 40
+                'maxResults': 10
             },
             'success': function(data) {
                 // cicliamo il data .items che ci restituisce un libro ad ogni ciclio
@@ -117,6 +125,7 @@ $(document).ready(function() {
                     var bottomSection = templateBottomFunction(propertiesBottom);
                     $('.top.section').append(topSection);
                     $('.bottom.section').append(bottomSection);
+                    $('.book-card:first-child').addClass('opacity');
                 },
                 'error': function() {
                 }

@@ -20,11 +20,13 @@
                     </span>
                 </div>
                 <div class="header right">
-                    <input id="searchbar" type="text" name="" value="">
+                    <input id="searchbar" type="text" name="" value="" placeholder="Inizia la tua ricerca...">
                     <i id="search_icon" class="fas fa-search fa-md"></i>
+                    <button type="button" name="button">Log in</button>
                 </div>
             </div>
         </header>
+
         <main>
             <div class="intro">
                 <h1>Innamorati dei libri, ma prima cercali!</h1>
@@ -41,6 +43,7 @@
                 <i class="fas fa-chevron-right"></i>
             </div>
         </main>
+
         <script id="template" type="text/x-handlebars-template">
             <div class="book-card">
                 <div class="cover-container">
@@ -48,12 +51,12 @@
                 </div>
             </div>
         </script>
+
         <script id="templateBottom" type="text/x-handlebars-template">
             <div class="info-container {{ class }}">
                 <h3>{{ title }}</h3>
                 <ul>
-                    <li>{{ author }}</li>
-                    <li>{{ publishedDate }}</li>
+                    <li>{{ author }} - {{ publishedDate }} - {{ categories }}</li>
                     <li>{{{ rating }}}{{{ noRating }}}</li>
                     <li>{{{ description }}}</li>
                 </ul>
