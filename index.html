@@ -32,6 +32,20 @@
                 <h1>Innamorati dei libri, ma prima cercali!</h1>
                 <img src="img/book_lover.svg" alt="">
             </div>
+            <select id="selector" class="filtri" name="">
+                <option value="">Seleziona Genere</option>
+                <option value="fiction">Fiction</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="action">Action & Adventure</option>
+                <option value="horror">Horror</option>
+                <option value="thriller">Thriller</option>
+                <option value="romance">Romance</option>
+                <option value="bio">Biography & Autobiography</option>
+                <option value="science">Science & Technology</option>
+                <option value="art">Art</option>
+                <option value="history">History</option>
+                <option value="study">Study & Teaching</option>
+            </select>
             <div class="arrow left">
                 <i class="fas fa-chevron-left"></i>
             </div>
@@ -42,10 +56,14 @@
             <div class="arrow right">
                 <i class="fas fa-chevron-right"></i>
             </div>
+            <div class="empty">
+                <h2>Nessun risultato trovato</h2>
+                <img src="img/empty.svg" alt="empty_page">
+            </div>
         </main>
 
         <script id="template" type="text/x-handlebars-template">
-            <div class="book-card">
+            <div class="book-card" data-generi="{{ categories }}">
                 <div class="cover-container">
                     <img src=" {{ img }}" alt="">
                 </div>
@@ -53,7 +71,7 @@
         </script>
 
         <script id="templateBottom" type="text/x-handlebars-template">
-            <div class="info-container {{ class }}">
+            <div class="info-container {{ class }}" data-generi="{{ categories }}">
                 <h3>{{ title }}</h3>
                 <ul>
                     <li>{{ author }} - {{ publishedDate }} - {{ categories }}</li>
@@ -64,3 +82,4 @@
         </script>
     </body>
  </html>
+
