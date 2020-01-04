@@ -23,27 +23,96 @@ $(document).ready(function() {
             $('.bottom.section').empty();
             var ricerca = $('input').val();
             bookApiCall(ricerca);
+            $('#selector').addClass('active');
         }
     });
+
+    // $('.book-card:first-child').addClass('opacity');
+
+    $('#selector').change(function(){
+        var current_value = $(this).val();
+        $('.empty').removeClass('active');
+        $('.arrow i').show();
+        // caso in cui si voglia tornare a visualizzare tutti i libri tramite 'Seleziona genere'
+        if (current_value == '') {
+            // azzera tutto e
+            $('.book-card').removeClass('hide');
+            $('.book-card').removeClass('boom');
+            $('.book-card').removeClass('opacity');
+            // al primo libro dai opacity
+            $('.book-card:first-child').addClass('opacity');
+            $('.info-container').removeClass('active');
+            // al primo info dai active
+            $('.info-container:first-child').addClass('active');
+        } else {
+            // entro dentro un genere specifico e inizio a sfogliare OGNI libro
+            $('.book-card').each(function(){
+                var info_value = $(this).attr('data-generi');
+                // se trovo una corrispondenza
+                if (info_value.toLowerCase().includes(current_value.toLowerCase())) {
+                    // a questo libro do la classe boom e rimuovo hide
+                    $(this).removeClass('hide').addClass('boom');
+                } else {
+                    // altrimenti, lo nasconodo con hide e rimuovo opacity
+                    $(this).addClass('hide').removeClass('boom');
+                    $(this).removeClass('opacity');
+                };
+            });
+            // a questo punto, ho una nuova lista di libri filtrati, etichettati con boom e hide
+
+            // se non esistono libri con classe boom (non sono state trovate corrispondenze)
+            if (!$('.book-card').hasClass('boom')) {
+                // QUI POSSIAMO GESTIRE MESSAGGIO DI NON CORRISPONDENZA E FRECCE CAROSELLO
+                $('.arrow i').hide();
+                $('.empty').addClass('active');
+                //rimuovo la classe active a tutti gli info
+                $('.info-container').removeClass('active');
+            } else {
+                // invece, se esiste almeno un libro con la classe boom, quindi almeno un libro riesce a soddisfare il filtro
+                // faccio pulizia totoale di opacity e active
+                $('.book-card').removeClass('opacity');
+                $('.info-container').removeClass('active');
+                // al primo libro con boom do opacity
+                var first_filtred_book = $('.book-card.boom').first();
+                first_filtred_book.addClass('opacity');
+                // all'info, nella stessa posizione, do la classe active
+                var position = first_filtred_book.index();
+                $('.info-container').eq(position).addClass('active');
+            }
+        };
+    });
+
 
     //carosello:
     //aggiungiamo classe show all'u;ltimo libro
     //intercettiamo click su freccia
     $('.arrow.right i').click(function(){
-        var bookCorrente = $('.book-card.opacity');
-        var bookSucc = bookCorrente.next();
-        bookCorrente.removeClass('opacity');
-        bookSucc.addClass('opacity');
-        $('.top.section').append($('.book-card').eq(0));
-        var infoCorrente = $('.info-container.active');
-        var infoSucc = infoCorrente.next();
-        infoCorrente.removeClass('active');
-        infoSucc.addClass('active');
-        $('.bottom.section').append($('.info-container').eq(0));
+        // al click sulla freccia, se c'è un boom fai delle cose particolari
+        // quali? scorri vero il prossimo book boom
+        if ($('.book-card').hasClass('boom')) {
+            var bookCorrente = $('.book-card.opacity');
+            
+            bookCorrente.removeClass('opacity');
+            bookSucc.addClass('opacity');
+        } else {
+            // altrimenti comportati di default
+            var bookCorrente = $('.book-card.opacity');
+            var bookSucc = bookCorrente.next();
+            bookCorrente.removeClass('opacity');
+            bookSucc.addClass('opacity');
+            $('.top.section').append($('.book-card').eq(0));
+            var infoCorrente = $('.info-container.active');
+            var infoSucc = infoCorrente.next();
+            infoCorrente.removeClass('active');
+            infoSucc.addClass('active');
+            $('.bottom.section').append($('.info-container').eq(0));
+        }
     });
 
     $('.arrow.left i').click(function(){
-        // BISOGNA USCIRE DAI 39 FISSI!!!!
+        // al click sulla freccia, se c'è un boom fai delle cose particolari
+        // quali? scorri vero il prossimo book boom
+        // altrimenti comportati di default
         $('.top.section').prepend($('.book-card').eq(9));
         $('.bottom.section').prepend($('.info-container').eq(9));
         var bookCorrente = $('.book-card.opacity');
@@ -66,7 +135,6 @@ $(document).ready(function() {
             },
             'success': function(data) {
                 // cicliamo il data .items che ci restituisce un libro ad ogni ciclio
-                console.log(data);
                 var books = data.items;
                 bookGenerator(books);
             },
@@ -115,10 +183,11 @@ $(document).ready(function() {
                         'description': currentBook.description,
                         'publisher': currentBook.publisher,
                         'pageCount':  currentBook.pageCount,
-                        'categories': currentBook.categories,
-                        'class': classActive
+                        'class': classActive,
+                        'categories': currentBook.categories
                     }
                     var properties = {
+                        'categories': currentBook.categories,
                         'img':  currentBook.imageLinks.thumbnail
                     };
                     var topSection = templateFunction(properties);
